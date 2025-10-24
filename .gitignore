@@ -1,1 +1,6 @@
 env/
+.env
+my_vector_db/
+data/intermediate_data.jsonl
+data/t5_training_data.jsonl
+training_model/generate_synthetic_data.py
