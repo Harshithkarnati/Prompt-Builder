@@ -45,10 +45,18 @@ Prompt-Builder/
 │   │   └── templates.json        # Your prompt templates (required)
 │   ├── generated_vague/
 │   │   └── generated_vague_prompts.json  # Vague prompts for testing
-│   └── intermediate_data.jsonl   # Output file with retrieved templates
+│   ├── retrieval/
+│   │   └── pure_python_results.jsonl    # Retrieved templates with metadata
+│   └── training/
+│       ├── t5_fine_tuning_dataset.jsonl    # Basic T5 training data
+│       └── enhanced_t5_dataset.jsonl       # Enhanced T5 training data ⭐
 │
 ├── my_vector_db/                 # ChromaDB storage (auto-created)
 │   └── chroma.sqlite3
+│
+├── scripts/                      # T5 Dataset Building Scripts ✨
+│   ├── build_t5_dataset.py      # Basic T5 dataset builder
+│   └── build_enhanced_t5_dataset.py  # Enhanced T5 dataset builder ⭐
 │
 └── training_model/
     ├── indexing_templates.py     # Step 1: Index templates into vector DB
@@ -217,6 +225,40 @@ Retrieving Templates: 100%|████████| 100/100 [00:15<00:00, 6.67i
 ✅ Successfully retrieved templates for 100 prompts.
 Intermediate data saved to: ../data/intermediate_data.jsonl
 ```
+
+### Step 3: Build T5 Fine-tuning Dataset ✨
+
+Transform the retrieved templates into optimized prompts for T5 training:
+
+#### Option A: Basic Version
+```powershell
+cd scripts
+python build_t5_dataset.py
+```
+
+#### Option B: Enhanced Version (Recommended) ⭐
+```powershell
+cd scripts
+python build_enhanced_t5_dataset.py
+```
+
+**Expected Output:**
+```
+Building enhanced T5 dataset...
+Input: data/retrieval/pure_python_results.jsonl
+Output: data/training/enhanced_t5_dataset.jsonl
+Processed 100 entries...
+...
+Enhanced dataset building complete!
+Successfully processed: 958 entries
+Output saved to: data/training/enhanced_t5_dataset.jsonl
+```
+
+The enhanced version creates intelligent, context-aware prompts with:
+- 🎯 Content type detection (social media, business, presentations)
+- 👤 User personalization based on metadata
+- 📝 Professional formatting ready for AI consumption
+- 🔧 Specialized templates for different domains
 
 ### Output Format
 
